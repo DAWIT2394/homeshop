@@ -1,25 +1,37 @@
 ﻿const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-const userRoutes = require('./routes/userRoutes');
-const shopRoutes = require('./routes/shopRoutes');
-const productRoutes = require('./routes/productRoutes');  // Import product routes
+const connectDB = require('./db/connect.js');  // Your MongoDB connection function
+const userRoutes = require('./routes/userRoutes');  // User routes
+const shopRoutes = require('./routes/shopRoutes');  // Shop routes
+const productRoutes = require('./routes/productRoutes');  // Product routes
 
 const app = express();
 
-app.use(bodyParser.json());
+// Middleware
+app.use(bodyParser.json());  // Parse incoming JSON requests
 
-app.use('/api/users', userRoutes);
-app.use('/api/shops', shopRoutes);
-app.use('/api/products', productRoutes);  // Use product routes
+// Routes
+app.use('/api/users', userRoutes);  // User-related API routes
+app.use('/api/shops', shopRoutes);  // Shop-related API routes
+app.use('/api/products', productRoutes);  // Product-related API routes
 
-mongoose.connect('mongodb://localhost:27017/ecommerce-app', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(5000, () => {
-        console.log('Server running on port 5000');
+const port = process.env.PORT || 8000;
+
+// Start server
+const start = async () => {
+  try {
+    // Connect to MongoDB
+    await connectDB();  // Ensure the connection string is loaded correctly inside connectDB
+    
+    // Start the Express server
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
     });
-}).catch(err => console.error(err));
+  } catch (error) {
+    console.error('Error starting the server:', error);
+  }
+};
+
+// Execute the start function to initialize the server and DB connection
+start();
