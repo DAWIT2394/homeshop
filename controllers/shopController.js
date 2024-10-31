@@ -10,6 +10,7 @@ exports.createShop = async (req, res) => {
         await newShop.save();
         res.status(201).json(newShop);
     } catch (err) {
+        console.error("Error creating shop:", err); // Log error details
         res.status(500).json({ error: err.message });
     }
 };
