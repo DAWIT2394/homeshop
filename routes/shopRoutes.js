@@ -1,9 +1,9 @@
 const express = require('express');
+const { createShop, getAllShops } = require('../controllers/shopController'); // Ensure this path is correct
 const router = express.Router();
-const shopController = require('../controllers/shopController');
-const authMiddleware = require('../middleware/auth');
 
-router.post('/', shopController.createShop);
-router.get('/', shopController.getAllShops);
+// Define routes
+router.post('/', createShop);
+router.get('/', getAllShops);
 
 module.exports = router;
