@@ -23,7 +23,7 @@ phone_number: {
   },
   role: {
     type: String,
-    enum:['user', 'admin','mechanicsr','garage'],
+    enum:['user', 'admin','shop owner'],
     required: true,
   },
 

@@ -5,15 +5,9 @@ const {
   signin,
 logout
 } = require("../controllers/authcontroller");
-const {
-  authenticateUser,
-  authorizePermissions,
-} = require("../middleware/authentication");
+const {authenticateUser,authorizePermissions,} = require("../middleware/authentication");
 
-router.post(
-  "/register",
-  register
-);
+router.post("/register",register);
 router.post("/login", signin);
 router.get("/logout", logout);
 // router.post("/reset-password", ResetPassword);

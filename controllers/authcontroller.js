@@ -3,7 +3,7 @@ const User = require("../models/User"); // Ensure you import the User model
 const { attachCookiesToResponse, createTokenUser } = require("../utils");
 const register = async (req, res) => {
   try {
-    const { fullname, position, email, password, phone_number, role } =
+    const { fullname, email, password, phone_number, role } =
       req.body;
 
     const emailAlreadyExists = await User.findOne({ email });

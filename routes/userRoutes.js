@@ -6,33 +6,18 @@ const{
     updateUser,deleteAllUsers,
     updateUserPassword
 }=require('../controllers/userController')
-const {
-  authenticateUser,
-  authorizePermissions,
-} = require("../middleware/authentication");
+const {authenticateUser,authorizePermissions,} = require("../middleware/authentication");
 
 const router=express.Router()
-router.get('/getallusers',
-
- getAllUsers)
-router.get("/getuserById/:id", authenticateUser, getUserById
-);
-router.post(
-  "/delete/:id",
-  [authenticateUser, authorizePermissions("access_all")],
-  deleteuser
-);
+router.get('/getallusers',getAllUsers)
+router.get("/getuserById/:id", authenticateUser, getUserById);
+router.post("/delete/:id", [authenticateUser, authorizePermissions("access_all")],deleteuser);
 router.patch('/update',authenticateUser,updateUser)
-router.patch(
-  "/updateUserPassword",
-  authenticateUser, 
-  updateUserPassword
-);
+router.patch("/updateUserPassword",authenticateUser, updateUserPassword);
 
-router.delete(
-  "/deleteall",
+router.delete("/deleteall",
   // [authenticateUser, authorizePermissions("access_all")],
-  deleteAllUsers
+   deleteAllUsers
 );
 
 /**

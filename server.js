@@ -24,6 +24,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler.js");
 
 const views = path.join(__dirname, 'view');
 
+// Route for homepage
 app.get('/', (req, res) => {
   res.sendFile(`${views}/index.html`);
 });
@@ -35,10 +36,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static("views"));
 
 app.use(cookieParser(process.env.JWT_SECRET));
+
+// Route handling
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/shops", shopRouter); // Use the shopRouter here
+app.use("/api/v1/shops", shopRouter);  // Mount the shop routes here
 
+// Error handling
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
