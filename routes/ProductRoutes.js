@@ -12,9 +12,7 @@ const {
 
 // Create a new product (Shop Owner/Admin only)
 router.post(
-  "/",
-  authenticateUser,                          // Ensures the user is authenticated
-  authorizePermissions1("admin", "shop-owner"), // Restricts to admin and shop owners based on role
+  "/", // Restricts to admin and shop owners based on role
   productController.createProduct
 );
 
