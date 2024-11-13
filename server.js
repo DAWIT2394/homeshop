@@ -16,16 +16,17 @@ const io = socketIO(server);
 const connectDB = require("./db/connect.js");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRoutes.js");
-const shopRouter = require("./routes/shopRoutes.js"); // Import shopRouter
+const shopRouter = require("./routes/shopRoutes.js");
+const productRouter = require("./routes/ProductRoutes.js"); // Fixed comment
 
 // Middleware
 const notFoundMiddleware = require("./middleware/not-found.js");
 const errorHandlerMiddleware = require("./middleware/error-handler.js");
 
-const views = path.join(__dirname, 'view');
+const views = path.join(__dirname, "view");
 
 // Route for homepage
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(`${views}/index.html`);
 });
 
@@ -34,13 +35,13 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static("views"));
-
 app.use(cookieParser(process.env.JWT_SECRET));
 
 // Route handling
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/shops", shopRouter);  // Mount the shop routes here
+app.use("/api/v1/shops", shopRouter);
+app.use("/api/v1/products", productRouter); // Fixed the route path for products
 
 // Error handling
 app.use(notFoundMiddleware);
