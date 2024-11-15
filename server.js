@@ -22,7 +22,7 @@ const productRouter = require("./routes/ProductRoutes.js"); // Fixed comment
 // Middleware
 const notFoundMiddleware = require("./middleware/not-found.js");
 const errorHandlerMiddleware = require("./middleware/error-handler.js");
-
+const orderRouter = require('./routes/orderRoutes');
 const views = path.join(__dirname, "view");
 
 // Route for homepage
@@ -35,6 +35,7 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static("views"));
+app.use("/api/v1/orders", orderRouter); // Mount the order routes
 app.use(cookieParser(process.env.JWT_SECRET));
 
 // Route handling
