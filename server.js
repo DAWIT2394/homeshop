@@ -35,7 +35,6 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static("views"));
-app.use("/api/v1/orders", orderRouter); // Mount the order routes
 app.use(cookieParser(process.env.JWT_SECRET));
 
 // Route handling
@@ -43,6 +42,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/shops", shopRouter);
 app.use("/api/v1/products", productRouter); // Fixed the route path for products
+app.use("/api/v1/orders", orderRouter); // Mount the order routes
 
 // Error handling
 app.use(notFoundMiddleware);
